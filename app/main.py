@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 
 from app.database import get_db
@@ -32,15 +33,8 @@ analytics_service = AnalyticsService()
 
 @app.get("/")
 async def root():
-    """Root endpoint"""
-    return {
-        "message": "EdTech NLP-to-SQL API",
-        "version": "1.0.0",
-        "endpoints": {
-            "query": "POST /query",
-            "stats": "GET /stats"
-        }
-    }
+    """Redirect to interactive API documentation"""
+    return RedirectResponse(url="/docs")
 
 
 @app.post("/query", response_model=QueryResponse)
