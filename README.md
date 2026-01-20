@@ -18,11 +18,11 @@ An AI-powered backend service that converts natural language questions into SQL 
 
 ## Overview
 
-This project implements an intelligent backend service for an EdTech platform that allows non-technical users to query educational data using natural language. The system uses OpenAI's GPT model to convert questions like "How many students enrolled in Python courses in 2024?" into valid SQL queries and executes them safely.
+This project implements an intelligent backend service for an EdTech platform that allows non-technical users to query educational data using natural language. The system uses Google's Gemini AI model to convert questions like "How many students enrolled in Python courses in 2024?" into valid SQL queries and executes them safely.
 
 ## Features
 
-- ✅ Natural language to SQL conversion using LLM (OpenAI GPT-3.5)
+- ✅ Natural language to SQL conversion using LLM (Google Gemini AI)
 - ✅ Safe SQL execution with query validation (only SELECT queries allowed)
 - ✅ RESTful API built with FastAPI
 - ✅ Analytics endpoint for query statistics
@@ -52,7 +52,7 @@ This project implements an intelligent backend service for an EdTech platform th
        ▼
 ┌─────────────────────────────────┐
 │    NLP-to-SQL Service           │
-│    (OpenAI GPT-3.5)             │
+│    (Google Gemini AI)           │
 └──────┬──────────────────────────┘
        │
        ▼
@@ -78,7 +78,7 @@ This project implements an intelligent backend service for an EdTech platform th
 ### Prerequisites
 
 - Python 3.11 or higher
-- OpenAI API key
+- Google Gemini API key
 - pip (Python package manager)
 
 ### Local Setup
@@ -110,8 +110,8 @@ This project implements an intelligent backend service for an EdTech platform th
    # Copy the example file
    copy .env.example .env
    
-   # Edit .env and add your OpenAI API key
-   OPENAI_API_KEY=your-actual-api-key-here
+   # Edit .env and add your Gemini API key
+   GEMINI_API_KEY=your-actual-api-key-here
    DATABASE_URL=sqlite:///./edtech.db
    ```
 
@@ -207,7 +207,7 @@ Here are some example questions you can ask:
 
 ## NLP-to-SQL Approach
 
-### LLM-Based Approach (OpenAI GPT-3.5)
+### LLM-Based Approach (Google Gemini AI)
 
 This implementation uses an **LLM-based approach** for converting natural language to SQL, which is the preferred method for this assignment.
 
@@ -319,7 +319,7 @@ docker build -t edtech-nlp2sql:latest .
 docker run -d \
   --name edtech-api \
   -p 8000:8000 \
-  -e OPENAI_API_KEY="your-api-key-here" \
+  -e GEMINI_API_KEY="your-api-key-here" \
   edtech-nlp2sql:latest
 ```
 
@@ -395,8 +395,8 @@ The Kubernetes pod is configured with:
 ### Current Limitations
 
 1. **LLM Dependency:**
-   - Requires OpenAI API key
-   - API costs for each query
+   - Requires Google Gemini API key
+   - API calls (free tier available)
    - Network latency for API calls
 
 2. **Query Accuracy:**
@@ -521,7 +521,7 @@ Aptcoder_python_Assignment/
 - **FastAPI:** Modern Python web framework
 - **SQLAlchemy:** SQL toolkit and ORM
 - **Pydantic:** Data validation using Python type hints
-- **OpenAI GPT-3.5:** LLM for NLP-to-SQL conversion
+- **Google Gemini AI:** LLM for NLP-to-SQL conversion
 - **SQLite:** Lightweight database
 - **pytest:** Testing framework
 - **Docker:** Containerization

@@ -42,7 +42,7 @@ class TestAPIEndpoints:
         test_db.add(student)
         test_db.commit()
         
-        # Note: This test requires OpenAI API key to be configured
+        # Note: This test requires Gemini API key to be configured
         # In a real scenario, you would mock the NLP2SQL service
         # For now, we'll test the structure
         response_data = {

@@ -35,7 +35,7 @@ if [ ! -f .env ]; then
     echo "Creating .env from .env.example..."
     cp .env.example .env
     echo ""
-    echo "IMPORTANT: Edit .env and add your OpenAI API key before running the app!"
+    echo "IMPORTANT: Edit .env and add your Gemini API key before running the app!"
     echo ""
 fi
 

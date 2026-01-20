@@ -5,7 +5,7 @@ docker build -t edtech-nlp2sql:latest .
 docker run -d \
   --name edtech-api \
   -p 8000:8000 \
-  -e OPENAI_API_KEY="your-api-key-here" \
+  -e GEMINI_API_KEY="your-api-key-here" \
   edtech-nlp2sql:latest
 
 # View logs

@@ -19,7 +19,7 @@
 - [x] Additional endpoints: GET /stats, GET /health
 
 ### Section 3: NLP to SQL (Core Task) ✅
-- [x] Implemented LLM-based approach using OpenAI GPT-3.5 (preferred method)
+- [x] Implemented LLM-based approach using Google Gemini AI (preferred method)
 - [x] Only SELECT queries allowed
 - [x] DELETE, DROP, UPDATE queries blocked with validation
 - [x] Schema context provided to LLM
@@ -113,7 +113,7 @@
 
 ### Required Features
 1. ✅ Natural language to SQL conversion
-2. ✅ LLM-based approach (OpenAI GPT-3.5)
+2. ✅ LLM-based approach (Google Gemini AI)
 3. ✅ Safe query execution
 4. ✅ Query validation and filtering
 5. ✅ Analytics and logging
@@ -159,7 +159,7 @@ uvicorn app.main:app --reload
 ### Docker
 ```bash
 docker build -t edtech-nlp2sql:latest .
-docker run -p 8000:8000 -e OPENAI_API_KEY="your-key" edtech-nlp2sql:latest
+docker run -p 8000:8000 -e GEMINI_API_KEY="your-key" edtech-nlp2sql:latest
 ```
 
 ### Kubernetes
@@ -199,7 +199,7 @@ pytest --cov=app
 - ✅ Async/await patterns
 
 ### AI/ML
-- ✅ LLM integration (OpenAI)
+- ✅ LLM integration (Google Gemini)
 - ✅ Prompt engineering
 - ✅ NLP processing
 - ✅ Context management

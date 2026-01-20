@@ -35,13 +35,13 @@ if errorlevel 1 (
 echo Step 4: Checking for .env file...
 if not exist .env (
     echo WARNING: .env file not found!
-    echo Please create a .env file with your OpenAI API key
+    echo Please create a .env file with your Gemini API key
     echo You can copy .env.example and update it
     echo.
     echo Creating .env from .env.example...
     copy .env.example .env
     echo.
-    echo IMPORTANT: Edit .env and add your OpenAI API key before running the app!
+    echo IMPORTANT: Edit .env and add your Gemini API key before running the app!
     echo.
 )
 

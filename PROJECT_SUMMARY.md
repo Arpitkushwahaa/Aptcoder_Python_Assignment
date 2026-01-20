@@ -23,7 +23,7 @@ All 9 sections of the assignment have been completed:
 - Proper error handling and validation
 
 ### ✅ Section 3: NLP to SQL - Core Task (100%)
-- LLM-based approach using OpenAI GPT-3.5 Turbo
+- LLM-based approach using Google Gemini AI
 - Comprehensive schema context for accurate SQL generation
 - Advanced prompt engineering for reliable results
 - Multi-layer query validation
@@ -93,7 +93,7 @@ All 9 sections of the assignment have been completed:
 
 ### Architecture
 ```
-Client → FastAPI → NLP2SQL Service (OpenAI) → SQL Validator → Executor → Database
+Client → FastAPI → NLP2SQL Service (Gemini) → SQL Validator → Executor → Database
                                                                         ↓
                                                               Query Logger (Analytics)
 ```
@@ -101,7 +101,7 @@ Client → FastAPI → NLP2SQL Service (OpenAI) → SQL Validator → Executor �
 ### Technology Stack
 - **Backend:** FastAPI 0.109.0
 - **ORM:** SQLAlchemy 2.0.25
-- **AI/ML:** OpenAI GPT-3.5 Turbo
+- **AI/ML:** Google Gemini AI
 - **Database:** SQLite (dev), PostgreSQL-ready
 - **Testing:** pytest 7.4.4
 - **Validation:** Pydantic 2.5.3
@@ -141,7 +141,7 @@ Client → FastAPI → NLP2SQL Service (OpenAI) → SQL Validator → Executor �
 ## Performance
 
 - **Average Query Time:** 50-150ms (excluding LLM latency)
-- **LLM Response Time:** 1-3 seconds (OpenAI API)
+- **LLM Response Time:** 1-3 seconds (Gemini API)
 - **Memory Usage:** <512MB with limits
 - **CPU Usage:** <0.5 cores with limits
 
@@ -175,7 +175,7 @@ uvicorn app.main:app --reload
 ### 2. Docker
 ```bash
 docker build -t edtech-nlp2sql:latest .
-docker run -p 8000:8000 -e OPENAI_API_KEY="key" edtech-nlp2sql:latest
+docker run -p 8000:8000 -e GEMINI_API_KEY="key" edtech-nlp2sql:latest
 ```
 
 ### 3. Kubernetes
@@ -256,7 +256,7 @@ tests/test_sql_executor.py .....  [100%]
 ### ✅ Must-Have Skills Demonstrated
 - ✅ Hands-on Python development
 - ✅ Machine Learning & AI concepts (LLM integration)
-- ✅ NLP / LLMs (OpenAI integration)
+- ✅ NLP / LLMs (Google Gemini integration)
 - ✅ API development (FastAPI)
 - ✅ Data structures & algorithms
 - ✅ SQL databases (SQLAlchemy)

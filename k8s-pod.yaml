@@ -18,11 +18,11 @@ spec:
       protocol: TCP
     
     env:
-    - name: OPENAI_API_KEY
+    - name: GEMINI_API_KEY
       valueFrom:
         secretKeyRef:
           name: edtech-secrets
-          key: openai-api-key
+          key: gemini-api-key
     - name: DATABASE_URL
       value: "sqlite:///./data/edtech.db"
     

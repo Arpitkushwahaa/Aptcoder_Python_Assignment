@@ -10,8 +10,8 @@ Before you begin, ensure you have:
    - Check: `python --version`
    - Download from: https://www.python.org/downloads/
 
-2. **OpenAI API Key**
-   - Sign up at: https://platform.openai.com/
+2. **Google Gemini API Key**
+   - Sign up at: https://aistudio.google.com/
    - Create an API key from your account dashboard
    - **Important:** You'll need this for the application to work
 
@@ -26,7 +26,7 @@ Before you begin, ensure you have:
 # Run the automated setup script
 setup.bat
 
-# Edit .env file with your OpenAI API key
+# Edit .env file with your Gemini API key
 notepad .env
 
 # Start the application
@@ -41,7 +41,7 @@ chmod +x setup.sh
 # Run the automated setup script
 ./setup.sh
 
-# Edit .env file with your OpenAI API key
+# Edit .env file with your Gemini API key
 nano .env
 
 # Start the application
@@ -80,9 +80,9 @@ copy .env.example .env
 # Linux/Mac:
 cp .env.example .env
 
-# Edit .env and add your OpenAI API key
+# Edit .env and add your Gemini API key
 # The file should look like:
-OPENAI_API_KEY=sk-your-actual-api-key-here
+GEMINI_API_KEY=your-actual-api-key-here
 DATABASE_URL=sqlite:///./edtech.db
 ```
 
@@ -195,7 +195,7 @@ docker build -t edtech-nlp2sql:latest .
 docker run -d \
   --name edtech-api \
   -p 8000:8000 \
-  -e OPENAI_API_KEY="sk-your-api-key-here" \
+  -e GEMINI_API_KEY="your-api-key-here" \
   edtech-nlp2sql:latest
 
 # View logs
@@ -222,7 +222,7 @@ docker rm edtech-api
 
 ```bash
 # 1. Edit the secret with your API key
-# Edit k8s-secret.yaml and replace 'your-openai-api-key-here'
+# Edit k8s-secret.yaml and replace 'your-gemini-api-key-here'
 
 # 2. Apply the secret
 kubectl apply -f k8s-secret.yaml
@@ -258,7 +258,7 @@ source venv/bin/activate  # Linux/Mac
 pip install -r requirements.txt
 ```
 
-### Issue: "OpenAI API Key not found"
+### Issue: "Gemini API Key not found"
 
 **Solution:** Ensure your `.env` file exists and contains the API key:
 ```bash
@@ -270,7 +270,7 @@ type .env
 cat .env
 
 # It should contain:
-OPENAI_API_KEY=sk-your-actual-key
+GEMINI_API_KEY=your-actual-key
 DATABASE_URL=sqlite:///./edtech.db
 ```
 
@@ -355,8 +355,8 @@ Aptcoder_python_Assignment/
 
 1. **API Key Security:** Never commit your `.env` file to Git
 2. **Database:** SQLite is for development; use PostgreSQL for production
-3. **Costs:** OpenAI API calls incur costs; monitor your usage
-4. **Rate Limits:** Be aware of OpenAI API rate limits
+3. **Costs:** Gemini API has free tier; monitor your usage
+4. **Rate Limits:** Be aware of Gemini API rate limits
 
 ## Common Commands Reference
 
@@ -374,7 +374,7 @@ pytest --cov=app
 docker build -t edtech-nlp2sql:latest .
 
 # Run Docker container
-docker run -p 8000:8000 -e OPENAI_API_KEY="key" edtech-nlp2sql:latest
+docker run -p 8000:8000 -e GEMINI_API_KEY="key" edtech-nlp2sql:latest
 
 # Apply Kubernetes resources
 kubectl apply -f k8s-pod.yaml
