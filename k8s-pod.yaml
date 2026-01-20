@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: edtech-nlp2sql-pod
+  labels:
+    app: edtech-nlp2sql
+    environment: production
+    version: v1.0.0
+spec:
+  containers:
+  - name: edtech-api
+    image: edtech-nlp2sql:latest
+    imagePullPolicy: IfNotPresent
+    
+    ports:
+    - containerPort: 8000
+      name: http
+      protocol: TCP
+    
+    env:
+    - name: OPENAI_API_KEY
+      valueFrom:
+        secretKeyRef:
+          name: edtech-secrets
+          key: openai-api-key
+    - name: DATABASE_URL
+      value: "sqlite:///./data/edtech.db"
+    
+    resources:
+      requests:
+        memory: "256Mi"
+        cpu: "250m"
+      limits:
+        memory: "512Mi"
+        cpu: "500m"
+    
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 8000
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 3
+    
+    readinessProbe:
+      httpGet:
+        path: /health
+        port: 8000
+      initialDelaySeconds: 10
+      periodSeconds: 5
+      timeoutSeconds: 3
+      failureThreshold: 3
+    
+    volumeMounts:
+    - name: data-volume
+      mountPath: /app/data
+  
+  volumes:
+  - name: data-volume
+    emptyDir: {}
+  
+  restartPolicy: Always
