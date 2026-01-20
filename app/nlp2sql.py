@@ -1,16 +1,16 @@
-import openai
+import google.generativeai as genai
 from app.config import get_settings
 from typing import Optional
 
 settings = get_settings()
-openai.api_key = settings.openai_api_key
+genai.configure(api_key=settings.gemini_api_key)
 
 
 class NLP2SQLService:
     """Service for converting natural language to SQL queries using LLM"""
     
     def __init__(self):
-        self.client = openai.OpenAI(api_key=settings.openai_api_key)
+        self.model = genai.GenerativeModel('gemini-pro')
         self.schema_info = """
 Database Schema:
 1. students table:
@@ -38,7 +38,7 @@ Relationships:
     
     def generate_sql(self, question: str) -> str:
         """
-        Generate SQL query from natural language question using OpenAI GPT
+        Generate SQL query from natural language question using Google Gemini
         
         Args:
             question: Natural language question
@@ -46,7 +46,7 @@ Relationships:
         Returns:
             SQL query string
         """
-        system_prompt = f"""You are an expert SQL query generator for an EdTech database.
+        prompt = f"""You are an expert SQL query generator for an EdTech database.
 {self.schema_info}
 
 IMPORTANT RULES:
@@ -62,27 +62,21 @@ IMPORTANT RULES:
 Example:
 Question: "How many students enrolled in Python courses in 2024?"
 SQL: SELECT COUNT(DISTINCT e.student_id) FROM enrollments e JOIN courses c ON e.course_id = c.id WHERE c.name LIKE '%Python%' AND strftime('%Y', e.enrolled_at) = '2024'
+
+Now generate a SQL query for this question: {question}
+
+Return ONLY the SQL query, nothing else.
 """
         
-        user_prompt = f"Generate a SQL query for this question: {question}"
-        
         try:
-            response = self.client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt}
-                ],
-                temperature=0,
-                max_tokens=500
-            )
-            
-            sql_query = response.choices[0].message.content.strip()
+            response = self.model.generate_content(prompt)
+            sql_query = response.text.strip()
             
             # Remove markdown code blocks if present
             if sql_query.startswith("```"):
-                sql_query = sql_query.split("\n", 1)[1]
-                sql_query = sql_query.rsplit("```", 1)[0]
+                lines = sql_query.split("\n")
+                sql_query = "\n".join(lines[1:-1]) if len(lines) > 2 else sql_query
+                sql_query = sql_query.replace("```sql", "").replace("```", "")
             
             sql_query = sql_query.strip()
             

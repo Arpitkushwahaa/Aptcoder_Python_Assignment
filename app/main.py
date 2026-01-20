@@ -75,9 +75,13 @@ async def query_endpoint(
         )
         
     except ValueError as e:
+        print(f"Validation Error: {e}")
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        print(f"Server Error: {type(e).__name__}: {e}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"{type(e).__name__}: {str(e)}")
 
 
 @app.get("/stats", response_model=StatsResponse)

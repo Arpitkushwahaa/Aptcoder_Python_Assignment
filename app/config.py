@@ -4,7 +4,7 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     """Application settings"""
-    openai_api_key: str
+    gemini_api_key: str
     database_url: str = "sqlite:///./edtech.db"
     
     class Config:
